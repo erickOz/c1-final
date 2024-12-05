@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import { useCharStates } from "../Context/Context";
 
 const Card = ({ char }) => {
-  const { setFavs } = useCharStates();
+  const { dispatch, state } = useCharStates();
 
-  const addFav = () => {
-    setFavs((favs) => [...favs, char]);
+  const findFav = state.favs.some((fav) => fav.id === char.id);
+  console.log(findFav);
+  const toggleFav = () => {
+    dispatch({ type: findFav ? "DELETE_FAV" : "ADD_FAV", payload: char });
   };
 
   return (
@@ -16,9 +18,17 @@ const Card = ({ char }) => {
         <img src={char.image} alt="" />
       </Link>
       <br />
-      <button onClick={addFav}>⭐</button>
+      <button onClick={toggleFav}>{findFav ? "🌟" : "⭐"}</button>
     </div>
   );
 };
 
 export default Card;
+
+//Lo que había antes en toggleFav
+// if (findFav) {
+//   dispatch({ type: "DELETE_FAV", payload: char });
+// } else {
+//   dispatch({ type: "ADD_FAV", payload: char });
+// }
+// setFavs((favs) => [...favs, char]);

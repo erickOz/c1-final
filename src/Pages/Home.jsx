@@ -2,8 +2,9 @@ import Card from "../Components/Card";
 import { useCharStates } from "../Context/Context";
 
 const Home = () => {
-  const { chars } = useCharStates();
-
+  const {
+    state: { chars },
+  } = useCharStates();
   return (
     <div>
       {chars.map((char) => (

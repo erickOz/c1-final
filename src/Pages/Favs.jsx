@@ -2,7 +2,9 @@ import { useCharStates } from "../Context/Context";
 import Card from "../Components/Card";
 
 const Favs = () => {
-  const { favs } = useCharStates();
+  const {
+    state: { favs },
+  } = useCharStates();
   return (
     <div>
       {favs.map((char) => (
